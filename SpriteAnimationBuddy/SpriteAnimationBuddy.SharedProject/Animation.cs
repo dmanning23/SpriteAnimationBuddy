@@ -37,7 +37,7 @@ namespace SpriteAnimationBuddyLib
 		/// <summary>
 		/// The interval between frames of the animation.
 		/// </summary>
-		public int Interval { get; set; }
+		public float Interval { get; set; }
 
 		/// <summary>
 		/// If true, the animation loops.
@@ -56,9 +56,8 @@ namespace SpriteAnimationBuddyLib
 		/// <summary>
 		/// Creates a new Animation object by full specification.
 		/// </summary>
-		public Animation(int? id, string name, int startingFrame, int endingFrame, int interval, bool isLoop)
+		public Animation(string name, int startingFrame, int endingFrame, float interval, bool isLoop)
 		{
-			Id = id;
 			Name = name;
 			StartingFrame = startingFrame;
 			EndingFrame = endingFrame;
@@ -70,8 +69,10 @@ namespace SpriteAnimationBuddyLib
 		/// copy constructor
 		/// </summary>
 		public Animation(Animation obj)
-			: this(obj.Id, obj.Name, obj.StartingFrame, obj.EndingFrame, obj.Interval, obj.IsLoop)
+			: this(obj.Name, obj.StartingFrame, obj.EndingFrame, obj.Interval, obj.IsLoop)
 		{
+			Id = obj.Id;
+			AnimatingSpriteId = obj.AnimatingSpriteId;
 		}
 
 		public void ParseXmlNode(XmlNode xmlNode)
@@ -99,7 +100,7 @@ namespace SpriteAnimationBuddyLib
 					break;
 				case "Interval":
 					{
-						Interval = Convert.ToInt32(value);
+						Interval = Convert.ToInt32(value) / 1000;
 					}
 					break;
 				case "IsLoop":

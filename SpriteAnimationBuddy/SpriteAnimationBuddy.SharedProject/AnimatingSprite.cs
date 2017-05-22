@@ -28,11 +28,6 @@ namespace SpriteAnimationBuddyLib
 		private Vector2 _sourceOffset = Vector2.Zero;
 
 		/// <summary>
-		/// The origin of the sprite, within a frame.
-		/// </summary>
-		private Point _frameOrigin = Point.Zero;
-
-		/// <summary>
 		/// The animation currently playing back on this sprite.
 		/// </summary>
 		private Animation _currentAnimation = null;
@@ -145,11 +140,13 @@ namespace SpriteAnimationBuddyLib
 		[Ignore]
 		public Point FrameDimensions
 		{
-			get { return _frameDimensions; }
+			get
+			{
+				return _frameDimensions;
+			}
 			set
 			{
 				_frameDimensions = value;
-				_frameOrigin = new Point(_frameDimensions.X / 2, _frameDimensions.Y / 2);
 			}
 		}
 
@@ -173,7 +170,7 @@ namespace SpriteAnimationBuddyLib
 		/// The animations defined for this sprite.
 		/// </summary>
 		[Ignore]
-		public List<Animation> Animations { get; set; }
+		private List<Animation> Animations { get; set; }
 
 		/// <summary>
 		/// Enumerate the animations on this animated sprite.
@@ -204,7 +201,7 @@ namespace SpriteAnimationBuddyLib
 		/// The source rectangle of the current frame of animation.
 		/// </summary>
 		[Ignore]
-		public Rectangle SourceRectangle { get; set; }
+		public Rectangle SourceRectangle { get; private set; }
 
 		#endregion //Properties
 
@@ -218,6 +215,30 @@ namespace SpriteAnimationBuddyLib
 			Animations = new List<Animation>();
 		}
 
+		public AnimatingSprite(ContentManager content, string textureName, Point frameDimensions, Vector2 sourceOffset) :this()
+		{
+			//check for bad frame dimensions when building this way
+			if (frameDimensions.X <= 0 || frameDimensions.Y <= 0)
+			{
+				throw new Exception($"Frame dimension of {{{frameDimensions.X}, {{{frameDimensions.Y}}} is invalid.");
+			}
+
+			//get the texture name
+			TextureName = textureName;
+
+			//get the source offset
+			SourceOffset = sourceOffset;
+
+			//grab the frame dimensions
+			FrameDimensions = frameDimensions;
+
+			//load the texture
+			Texture = content.Load<Texture2D>(TextureFilename.GetRelPathFileNoExt());
+
+			//set the frames per row
+			FramesPerRow = Texture.Width / FrameDimensions.X;
+		}
+
 		/// <summary>
 		/// copy constructor
 		/// </summary>
@@ -227,7 +248,6 @@ namespace SpriteAnimationBuddyLib
 		{
 			Id = obj.Id;
 			_frameDimensions = obj._frameDimensions;
-			_frameOrigin = obj._frameOrigin;
 			_currentAnimation = obj._currentAnimation;
 			_currentFrame = obj._currentFrame;
 			_elapsedTime = obj._elapsedTime;
@@ -250,8 +270,21 @@ namespace SpriteAnimationBuddyLib
 		{
 			if ((animation != null) && (this[animation.Name] == null))
 			{
-				animation.AnimatingSpriteId = Id.Value;
+				//set the foreign key of the animation
+				if (Id.HasValue)
+				{
+					animation.AnimatingSpriteId = Id.Value;
+				}
+
+				//add the animation to the list
 				Animations.Add(animation);
+
+				//If there is currently not an animation playing, set it to the new one.
+				if (null == _currentAnimation)
+				{
+					_currentAnimation = animation;
+				}
+
 				return true;
 			}
 
@@ -386,9 +419,9 @@ namespace SpriteAnimationBuddyLib
 			}
 
 			// update the source rectangle
-			int column = (_currentFrame - 1) / FramesPerRow;
+			int column = _currentFrame / FramesPerRow;
 			SourceRectangle = new Rectangle(
-				(_currentFrame - 1 - (column * FramesPerRow)) * _frameDimensions.X,
+				(_currentFrame - (column * FramesPerRow)) * _frameDimensions.X,
 				column * _frameDimensions.Y,
 				_frameDimensions.X, _frameDimensions.Y);
 
@@ -396,10 +429,10 @@ namespace SpriteAnimationBuddyLib
 			_elapsedTime += elapsedSeconds;
 
 			// advance to the next frame if ready
-			while (_elapsedTime * 1000f > (float)_currentAnimation.Interval)
+			while (_elapsedTime >= _currentAnimation.Interval)
 			{
 				_currentFrame++;
-				_elapsedTime -= (float)_currentAnimation.Interval / 1000f;
+				_elapsedTime -= _currentAnimation.Interval;
 			}
 		}
 
@@ -413,8 +446,8 @@ namespace SpriteAnimationBuddyLib
 		/// <param name="spriteEffect">The sprite-effect applied.</param>
 		public void Draw(SpriteBatch spriteBatch,
 			Vector2 position,
-			float layerDepth,
 			Color color,
+			float layerDepth = 0,
 			SpriteEffects spriteEffect = SpriteEffects.None)
 		{
 			// check the parameters
@@ -444,8 +477,8 @@ namespace SpriteAnimationBuddyLib
 		/// <param name="spriteEffect"></param>
 		public void Draw(SpriteBatch spriteBatch,
 			Rectangle targetRect,
-			float layerDepth,
 			Color color,
+			float layerDepth = 0,
 			SpriteEffects spriteEffect = SpriteEffects.None)
 		{
 			// check the parameters
