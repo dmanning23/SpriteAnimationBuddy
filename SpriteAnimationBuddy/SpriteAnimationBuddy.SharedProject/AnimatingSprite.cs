@@ -447,6 +447,7 @@ namespace SpriteAnimationBuddyLib
 		public void Draw(SpriteBatch spriteBatch,
 			Vector2 position,
 			Color color,
+			float scale = 1f,
 			float layerDepth = 0,
 			SpriteEffects spriteEffect = SpriteEffects.None)
 		{
@@ -461,7 +462,7 @@ namespace SpriteAnimationBuddyLib
 					color,
 					0f,
 					SourceOffset,
-					1f,
+					scale,
 					spriteEffect,
 					MathHelper.Clamp(layerDepth, 0f, 1f));
 			}
