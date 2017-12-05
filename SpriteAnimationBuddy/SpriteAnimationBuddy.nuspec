@@ -23,9 +23,7 @@
 				<dependency id="Vector2Extensions" version="1.0.1"/>
 				<dependency id="XmlBuddy" version="1.0"/>
 				<dependency id="SQLiteConnectionBuddy" version="1.0"/>
-				<dependency id="SQLiteNetExtensions" version="1.3.0"/>
-				<dependency id="SQLite.Net-PCL" version="3.1.1"/>
-				<dependency id="SQLite.Net.Core-PCL" version="3.1.1"/>
+				<dependency id="SQLiteNetExtensions" version="2.0"/>
 			</group>
 
 			<!--Xamarin.iOS Unified-->
@@ -36,9 +34,7 @@
 				<dependency id="Vector2Extensions" version="1.0.1"/>
 				<dependency id="XmlBuddy" version="1.0"/>
 				<dependency id="SQLiteConnectionBuddy" version="1.0"/>
-				<dependency id="SQLiteNetExtensions" version="1.3.0"/>
-				<dependency id="SQLite.Net-PCL" version="3.1.1"/>
-				<dependency id="SQLite.Net.Core-PCL" version="3.1.1"/>
+				<dependency id="SQLiteNetExtensions" version="2.0"/>
 			</group>
 
 			<!--Win Universal-->
@@ -50,8 +46,7 @@
 				<dependency id="Vector2Extensions" version="1.0.1"/>
 				<dependency id="XmlBuddy" version="1.0"/>
 				<dependency id="SQLiteConnectionBuddy" version="1.0"/>
-				<dependency id="SQLiteNetExtensions" version="1.3.0"/>
-				<dependency id="SQLite.Net-PCL" version="3.1.1"/>
+				<dependency id="SQLiteNetExtensions" version="2.0"/>
 			</group>
 
 			<group targetFramework="net451">
@@ -61,10 +56,7 @@
 				<dependency id="Vector2Extensions" version="1.0.1"/>
 				<dependency id="XmlBuddy" version="1.0"/>
 				<dependency id="SQLiteConnectionBuddy" version="1.0"/>
-				<dependency id="SQLiteNetExtensions" version="1.3.0"/>
-				<dependency id="SQLite.Net-PCL" version="3.1.1"/>
-				<dependency id="SQLite.Net.Core-PCL" version="3.1.1"/>
-				<dependency id="System.Data.SQLite.Core" version="1.0"/>
+				<dependency id="SQLiteNetExtensions" version="2.0"/>
 			</group>
 
 		</dependencies>

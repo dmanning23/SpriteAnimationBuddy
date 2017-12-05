@@ -1,12 +1,13 @@
 ﻿{
   "dependencies": {
-    "FilenameBuddy": "1.0.3",
+    "FilenameBuddy": "1.0.7",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "MonoGame.Framework.WindowsUniversal": "3.5.1.1679",
-    "SQLiteNetExtensions": "1.3.0",
+    "SQLiteConnectionBuddy": "1.0.14",
+    "SQLiteNetExtensions": "2.0.0",
     "System.Xml.XmlDocument": "4.3.0",
-    "Vector2Extensions": "1.0.6",
-    "XmlBuddy": "1.0.13"
+    "Vector2Extensions": "1.0.8",
+    "XmlBuddy": "1.0.16"
   },
   "frameworks": {
     "uap10.0": {}

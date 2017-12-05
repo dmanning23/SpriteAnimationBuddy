@@ -1,4 +1,4 @@
-using SQLite.Net.Attributes;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Xml;
