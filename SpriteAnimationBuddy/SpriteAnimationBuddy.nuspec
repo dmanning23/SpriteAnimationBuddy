@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>SpriteAnimationBuddy</id>
-		<version>1.0.3</version>
+		<version>1.0.5</version>
 		<title>SpriteAnimationBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -50,7 +50,7 @@
 			</group>
 
 			<group targetFramework="net451">
-				<dependency id="MonoGame.Framework.DesktopGL" version="3.5"/>
+				<dependency id="MonoGame.Framework.WindowsDX" version="3.5"/>
 				<dependency id="FilenameBuddy" version="1.0"/>
 				<dependency id="RandomExtensions.dmanning23" version="1.0"/>
 				<dependency id="Vector2Extensions" version="1.0.1"/>
@@ -75,9 +75,9 @@
 		<file src="SpriteAnimationBuddy.WindowsUniversal\bin\Release\SpriteAnimationBuddy.WindowsUniversal.pdb" target="lib\uap10.0\SpriteAnimationBuddy.WindowsUniversal.pdb" />
 		<file src="SpriteAnimationBuddy.WindowsUniversal\bin\Release\SpriteAnimationBuddy.WindowsUniversal.dll" target="lib\uap10.0\SpriteAnimationBuddy.WindowsUniversal.dll" />
 
-		<!--DesktopGL-->
-		<file src="SpriteAnimationBuddy.DesktopGL\bin\Release\SpriteAnimationBuddy.DesktopGL.pdb" target="lib\net451\SpriteAnimationBuddy.DesktopGL.pdb" />
-		<file src="SpriteAnimationBuddy.DesktopGL\bin\Release\SpriteAnimationBuddy.DesktopGL.dll" target="lib\net451\SpriteAnimationBuddy.DesktopGL.dll" />
+		<!--WindowsDX-->
+		<file src="SpriteAnimationBuddy.WindowsDX\bin\Release\SpriteAnimationBuddy.WindowsDX.pdb" target="lib\net451\SpriteAnimationBuddy.WindowsDX.pdb" />
+		<file src="SpriteAnimationBuddy.WindowsDX\bin\Release\SpriteAnimationBuddy.WindowsDX.dll" target="lib\net451\SpriteAnimationBuddy.WindowsDX.dll" />
 
 	</files>
 </package>
